@@ -1,0 +1,41 @@
+{
+  "name": "intrasudo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "createscripts": "chmod a+x bin/*",
+    "serve": "./bin/serve",
+    "start": "./bin/serve",
+    "serve:dev": "nodemon bin/serve",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed": "npx sequelize db:seed --seed seeders/*prod*.js",
+    "db:seed:all": "npx sequelize db:seed:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "compression": "^1.7.4",
+    "connect-redis": "^4.0.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-session": "^1.17.0",
+    "helmet": "^3.21.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "redis": "^3.0.2",
+    "sequelize": "^5.21.5",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1"
+  }
+}

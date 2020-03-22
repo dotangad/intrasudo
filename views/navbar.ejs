@@ -1,0 +1,12 @@
+<nav>
+  <div class="left">
+    <a href="/"><img src="/logo-blue.png" alt="Intrasudo"/></a>
+  </div>
+  <div class="right">
+    <a href="/leaderboard">Leaderboard</a>
+    <% if(authenticated) { %>
+    <a href="/play">Play</a>
+    <a href="/auth/logout">Logout</a>
+    <% } %>
+  </div>
+</nav>
