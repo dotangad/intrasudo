@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head.ejs", {title: "Level " + levelNo}) %>
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <style>
+      form .input input {
+        width: 500px;
+      }
+
+      form .half {
+        width: 500px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: -20px;
+      }
+
+      form .half .input {
+        width: 45%;
+      }
+
+      form .half .input input {
+        width: 100%;
+      }
+    </style>
+
+    <div class="body-container">
+      <a href="/levels">Back to levels</a>
+      <h1 style="margin: 30px 0;">Level <%- levelNo %> (<%- level.id %>)</h1>
+      <form action="/levels/<%- level.id %>" method="post">
+        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+        <div class="input">
+          <label for="question">Question</label>
+          <input
+            type="text"
+            placeholder="Who is our God?"
+            name="question"
+            value="<%- level.question %>"
+          />
+        </div>
+        <div class="input">
+          <label for="sourceHint">Source Hint</label>
+          <input
+            type="text"
+            placeholder="darthfire"
+            name="sourceHint"
+            value="<%- level.sourceHint %>"
+          />
+        </div>
+        <div class="half">
+          <div class="input">
+            <label for="answer">Answer</label>
+            <input
+              type="text"
+              placeholder="aaryakgarg"
+              name="answer"
+              value="<%- level.answer %>"
+            />
+          </div>
+          <div class="input">
+            <label for="points">Points</label>
+            <input
+              type="text"
+              placeholder="10000000000"
+              name="points"
+              value="<%- level.points %>"
+            />
+          </div>
+        </div>
+
+        <div class="delete" style="margin: 20px 0;">
+          <form
+            action="/levels/delete"
+            method="post"
+            style="display: none;"
+            id="delete"
+          >
+            <input type="hidden" name="id" value="<%- level.id %>" />
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+          </form>
+          <a href="#" style="color: red;">Delete level</a>
+        </div>
+
+        <button type="submit" style="margin: 20px 0;">Edit</button>
+      </form>
+    </div>
+
+    <%- include("footer.ejs") %>
+
+    <script>
+      const deleteForm = document.querySelector("form#delete");
+
+      const deleteHandler = e => {
+        e.preventDefault();
+
+        const deleteDiv = document.querySelector(".delete");
+
+        deleteDiv.innerHTML = "Are you sure? ";
+
+        const yes = document.createElement("a");
+        yes.href = "";
+        yes.addEventListener(
+          "click",
+          e_ => e_.preventDefault() && deleteForm.submit()
+        );
+        yes.innerHTML = "Yes";
+        yes.style.color = "red";
+        yes.style.margin = "0 10px";
+        yes.style.cursor = "pointer";
+        deleteDiv.appendChild(yes);
+
+        const no = document.createElement("a");
+        no.innerHTML = "No";
+        no.href = "#";
+        no.style.margin = "0 10px";
+        no.style.cursor = "pointer";
+        no.addEventListener("click", e_ => {
+          e_.preventDefault();
+          const deleteA = document.createElement("a");
+          deleteA.innerHTML = "Delete level";
+          deleteA.href = e.target.href;
+          deleteA.style.color = "red";
+          deleteA.addEventListener("click", deleteHandler);
+
+          deleteDiv.innerHTML = "";
+          deleteDiv.appendChild(deleteA);
+        });
+        deleteDiv.appendChild(no);
+      };
+
+      document
+        .querySelector(".delete a")
+        .addEventListener("click", deleteHandler);
+    </script>
+  </body>
+</html>

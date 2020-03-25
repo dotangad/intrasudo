@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head.ejs", {title: "Register"}) %>
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <style>
+      .avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .avatar img {
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
+        border: none;
+        border-radius: 900px;
+      }
+
+      .avatar .name {
+        text-align: center;
+        margin: 20px 0;
+        letter-spacing: 2px;
+        font-size: 2rem;
+        font-weight: 400;
+        font-size: "Sen", system-ui;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .avatar .email {
+        text-align: center;
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      #class-section {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      select {
+        width: 45%;
+        border: 2px solid #222;
+        background: #1f2225;
+        color: #eaeaef;
+        height: calc(1.7rem + 20px);
+        transition: border-color 0.2s ease;
+        font-size: 1rem;
+      }
+      select:focus {
+        outline: none;
+        border-color: 2px solid #2977f5;
+      }
+
+      label.class-section {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+      }
+      label.class-section span {
+        width: 45%;
+      }
+
+      .err {
+        color: red;
+        margin: 20px 0;
+        text-align: center;
+        width: 300px;
+      }
+    </style>
+
+    <div class="body-container">
+      <div class="flex-container">
+        <div>
+          <div class="avatar">
+            <img src="<%- user.photo %>" alt="avatar" />
+            <div class="name"><%- user.name %></div>
+            <div class="email"><%- user.email %></div>
+          </div>
+
+          <form action="/auth/initial" method="post">
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+            <div class="input">
+              <label for="phone">Phone (+91)</label>
+              <input
+                type="text"
+                placeholder="8580671234"
+                name="phone"
+                value="<%- phone %>"
+              />
+            </div>
+            <div class="input">
+              <label for="username"
+                >Username (no spaces or special characters)</label
+              >
+              <input
+                type="text"
+                placeholder="eggsonclam"
+                name="username"
+                value="<%- username %>"
+              />
+            </div>
+            <div class="input">
+              <label for="class-section" class="class-section"
+                ><span>Class</span><span>Section</span></label
+              >
+              <div id="class-section">
+                <select name="clss" id="class" data-value="<%- clss %>">
+                  <option selected disabled value="">Class</option>
+                  <option value="6">VI</option>
+                  <option value="7">VII</option>
+                  <option value="8">VIII</option>
+                  <option value="9">IX</option>
+                  <option value="10">X</option>
+                  <option value="11">XI</option>
+                  <option value="12">XII</option>
+                </select>
+                <select name="sction" id="section" data-value="<%- sction %>">
+                  <option selected disabled value="">Section</option>
+                  <% for(let l of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')) { %>
+                  <option value="<%- l %>"><%- l %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+
+            <% if(err) { %>
+            <div class="err"><%- err %></div>
+            <% } %>
+
+            <div class="btn-container">
+              <button type="submit">Play</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include("footer.ejs") %>
+
+    <script>
+      function selectOption(options, value) {
+        if (value !== "") {
+          const c = options.filter(o => o.value === value)[0];
+          const selected = options.filter(o => o.selected)[0];
+          c.selected = true;
+          selected.selected = false;
+        }
+      }
+
+      selectOption(
+        [...document.querySelectorAll('select[name="clss"] option')],
+        document.querySelector('select[name="clss"]').dataset.value
+      );
+      selectOption(
+        [...document.querySelectorAll('select[name="sction"] option')],
+        document.querySelector('select[name="sction"]').dataset.value
+      );
+    </script>
+  </body>
+</html>

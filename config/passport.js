@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const models = require("../models");
+const crypto = require("crypto");
 
 passport.use(
   "google",
@@ -13,13 +14,23 @@ passport.use(
     function(accessToken, refreshToken, profile, done) {
       models.User.findOne({ where: { googleId: profile.id } })
         .then(user => {
+          const photo = profile.photos[profile.photos.length - 1].value;
+          const email = profile.emails[0].value;
           if (!user) {
             return models.User.create({
               name: profile.displayName,
               googleId: profile.id,
-              photo: profile.photos[profile.photos.length - 1].value
+              email: email,
+              photo: photo,
+              username: crypto.randomBytes(10).toString("hex"),
+              points: 0,
+              currentLevelId: 1
             });
           } else {
+            if (photo !== user.photo) {
+              user.photo = photo;
+              user.save();
+            }
             done(null, user, "Logged in");
             return "done";
           }
@@ -35,7 +46,6 @@ passport.use(
 );
 
 passport.serializeUser(function(user, done) {
-  // TODO: Check if user is an exunite/admin here (from file)
   done(null, user.dataValues.id);
 });
 

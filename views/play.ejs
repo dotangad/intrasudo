@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head.ejs", {title: "Play"}) %>
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <style>
+      h1 {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      p {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .error {
+        margin: 20px 0;
+        color: red;
+        text-align: center;
+      }
+    </style>
+
+    <div class="body-container">
+      <div class="flex-container">
+        <div>
+          <% if(user.disqualified) { %>
+          <div class="error">
+            You have been disqualified. Please
+            <a href="https://m.me/sh4shw4t" style="color: red;">let us know</a>
+            if you think this is a mistake.
+          </div>
+          <% } else { %>
+          <h1>Level <%- levelNo %></h1>
+          <p><%- question %></p>
+          <form action="/play" method="post">
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+            <div class="input">
+              <input
+                type="text"
+                name="answer"
+                placeholder="Press enter to submit"
+              />
+            </div>
+
+            <% if(error) { %>
+            <div class="error"><%- error %></div>
+            <% } %>
+
+            <div class="btn-container">
+              <button
+                type="submit"
+                style="font-size: 0.9rem; padding: 8px 15px;"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <%- include("footer.ejs") %> <% if(!user.disqualified) { %>
+
+    <!-- <%- sourceHint %> -->
+
+    <script>
+      const input = document.querySelector("input[name='answer']");
+      const allowed = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
+
+      input.focus();
+
+      input.onkeydown = input.onkeyupA = input.onkeypress = e => {
+        // Ignore special keys like 'Shift' and 'Backspace' but still ignore characters like '_' and '/'
+        // This might be useful - https://javascript.info/keyboard-events
+        if (e.key.length == 1 && !allowed.includes(e.key)) {
+          e.preventDefault();
+          return;
+        }
+        if (e.key === "Enter") {
+          document.querySelector("form").submit();
+          return;
+        }
+      };
+    </script>
+    <% } %>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<style>
+  .card {
+    max-width: 300px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 0px 5px 20px 3px #313131ad;
+        -webkit-box-shadow: 0px 5px 20px 3px #313131ad;
+        -moz-box-shadow: 0px 5px 20px 3px #313131ad; */
+  }
+
+  /* .card * {
+        border: 1px solid #eaeaef50;
+      } */
+
+  .card .img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    padding-bottom: 30px;
+    background: #303434;
+    border: none;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card .img img {
+    width: 200px;
+    height: 200px;
+    border: none;
+    border-radius: 5000px;
+  }
+
+  .card .img .name {
+    width: 100%;
+    margin-top: 30px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .card .img .username {
+    width: 100%;
+    text-align: center;
+    margin-top: -5px;
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .card .info {
+    background: #2a2d2d;
+    padding: 30px;
+    border: none;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .card .tags {
+    width: 0100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .card .tags span {
+    padding: 05px 10px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 3px;
+    margin: 0 10px;
+  }
+
+  .card .tags span:first-child {
+    margin-left: 0;
+  }
+  .card .tags span:last-child {
+    margin-right: 0;
+  }
+
+  .card .info > div {
+    margin: 15px 0;
+  }
+  .card .info > div:first-child {
+    margin-top: 0;
+  }
+  .card .info > div:last-child {
+    margin-bottom: 0;
+  }
+
+  .card .dq {
+    color: #ff0000;
+    background: #ff000030;
+  }
+
+  .card .admin {
+    color: #1fe41d;
+    background: #1fe41d30;
+  }
+
+  .card .exunite {
+    color: #2977f5;
+    background: #2977f530;
+  }
+
+  .card .info .half-flex {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+
+  .card .info .last {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .card .info .last span:last-child {
+    font-weight: 600;
+  }
+
+  .card .info .buttons {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  .card .buttons .full > * {
+    width: 100%;
+  }
+
+  .card .buttons .half {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card .buttons .half a {
+    width: 48%;
+    font-size: 0.8rem;
+    padding: 7px 0;
+  }
+
+  .card .buttons a {
+    display: block;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 3px;
+  }
+
+  .level,
+  .points,
+  .class {
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+  }
+
+  .level svg,
+  .points svg,
+  .class svg {
+    height: 20px;
+    width: auto;
+    margin-right: 10px;
+    color: #eaeaef;
+  }
+
+  @media screen and (max-width: 400px) {
+    .card {
+      max-width: 400px;
+      box-shadow: none;
+      margin: 0;
+      padding: 0 20px;
+    }
+    .card .img,
+    .card .info {
+      background: #151719;
+    }
+
+    .card .info > * {
+      width: 100% !important;
+    }
+
+    .card .info .last {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .card .info .email {
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  }
+</style>
