@@ -174,7 +174,11 @@
             <td>
               <%- users[i].class %>-<%-users[i].section %>
             </td>
-            <td><%- users[i].levelNo %></td>
+            <td>
+              <%- users[i].levelNo %> <% if(users[i].finished) { %>
+              <span>&#127937;</span>
+              <% } %>
+            </td>
             <td>
               <span><%- users[i].points %></span>
               <!-- <span class="level">(<%- users[i].levelNo %>)</span> -->

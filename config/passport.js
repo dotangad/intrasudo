@@ -9,38 +9,52 @@ passport.use(
     {
       clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-      callbackURL: "http://localhost:3143/auth/google/callback"
+      callbackURL:
+        process.env.NODE_ENV !== "production"
+          ? "http://localhost:3143/auth/google/callback"
+          : "https://intra.sudocrypt.com/auth/google/callback"
     },
-    function(accessToken, refreshToken, profile, done) {
-      models.User.findOne({ where: { googleId: profile.id } })
-        .then(user => {
-          const photo = profile.photos[profile.photos.length - 1].value;
-          const email = profile.emails[0].value;
-          if (!user) {
-            return models.User.create({
-              name: profile.displayName,
-              googleId: profile.id,
-              email: email,
-              photo: photo,
-              username: crypto.randomBytes(10).toString("hex"),
-              points: 0,
-              currentLevelId: 1
-            });
-          } else {
-            if (photo !== user.photo) {
-              user.photo = photo;
-              user.save();
+    async function(accessToken, refreshToken, profile, done) {
+      try {
+        const photo = profile.photos[profile.photos.length - 1].value;
+        const email = profile.emails[0].value;
+
+        const user = await models.User.findOne({
+          where: { googleId: profile.id }
+        });
+
+        if (!user) {
+          const currentLevelId = await models.Level.findOne({
+            attributes: ["id"],
+            where: {
+              id: {
+                [Op.gt]: 0
+              }
             }
-            done(null, user, "Logged in");
-            return "done";
-          }
-        })
-        .then(user => {
-          if (user !== "done") {
-            done(null, user, "Registered");
-          }
-        })
-        .catch(done);
+          });
+
+          const newUser = await models.User.create({
+            name: profile.displayName,
+            googleId: profile.id,
+            email: email,
+            photo: photo,
+            username: crypto.randomBytes(10).toString("hex"),
+            points: 0,
+            currentLevelId
+          });
+
+          return done(null, newUser, "Registered");
+        }
+
+        if (photo !== user.photo) {
+          user.photo = photo;
+          await user.save();
+        }
+
+        return done(null, user, "Logged in");
+      } catch (err) {
+        done(err);
+      }
     }
   )
 );

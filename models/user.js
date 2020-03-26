@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       exunite: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      finished: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {}

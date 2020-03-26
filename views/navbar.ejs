@@ -4,9 +4,9 @@
   </div>
   <div class="right">
     <a href="/leaderboard">Leaderboard</a>
-    <% if(authenticated) { %>
+    <% if(authenticated) { %> <% if(!user.finished) { %>
     <a href="/play">Play</a>
-    <% if(user.admin) { %>
+    <% } %> <% if(user.admin) { %>
     <a href="/levels">Levels</a>
     <% } %>
     <a href="/auth/logout">Logout</a>

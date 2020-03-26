@@ -54,7 +54,8 @@ async function fetchUsers(exunOnly) {
     "username",
     "disqualified",
     "admin",
-    "exunite"
+    "exunite",
+    "finished"
   ];
   const order = [["points", "DESC"]];
   const where = { admin: false };
