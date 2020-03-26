@@ -129,6 +129,7 @@ router.post(
           req.user.finished = true;
           await req.user.save();
           res.redirect("/play/fin");
+          await models.Attempt.create(attempt);
           return;
         }
 

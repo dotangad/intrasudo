@@ -1,5 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const { Op } = require("sequelize");
 const models = require("../models");
 const crypto = require("crypto");
 
@@ -40,7 +41,7 @@ passport.use(
             photo: photo,
             username: crypto.randomBytes(10).toString("hex"),
             points: 0,
-            currentLevelId
+            currentLevelId: currentLevelId.id
           });
 
           return done(null, newUser, "Registered");
