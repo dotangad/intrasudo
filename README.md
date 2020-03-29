@@ -40,6 +40,7 @@ npm run serve:dev
 
 ## TODO
 
+- [ ] Dockerize
 - [ ] IP logging and banning
 - [ ] Make navbar responsive
 - [ ] Test account photo change
