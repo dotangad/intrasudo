@@ -125,6 +125,7 @@ router.post(
       if (req.currentLevel.answer === req.body.answer) {
         const nextLevel = await getNextLevel(req.currentLevel.id);
 
+        req.user.points += await points(req.currentLevel);
         if (!nextLevel) {
           req.user.finished = true;
           await req.user.save();
@@ -137,7 +138,6 @@ router.post(
         req.session.currentLevelNo += 1;
 
         req.user.currentLevelId = nextLevel.id;
-        req.user.points += await points(req.currentLevel);
         attempt.correct = true;
 
         res.redirect("/play");
