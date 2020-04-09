@@ -13,8 +13,6 @@ const toggleUserProp = prop => [
       const user = await models.User.findOne({
         where: { username: req.body.username }
       });
-      console.log(req.body.username, user);
-
       if (!user) {
         return res.redirect("/leaderboard");
       }

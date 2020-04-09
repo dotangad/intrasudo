@@ -7,7 +7,7 @@ const { authenticated } = require("../lib/auth");
 async function points(level) {
   const solvePos =
     (await models.Attempt.count({
-      where: { LevelId: level.id, attempt: level.answer }
+      where: { LevelId: level.id, attempt: level.answer },
     })) + 1;
 
   return level.points + level.points / solvePos;
@@ -17,9 +17,9 @@ async function getNextLevel(currentLevelId) {
   const level = await models.Level.findOne({
     where: {
       id: {
-        [Op.gt]: currentLevelId
-      }
-    }
+        [Op.gt]: currentLevelId,
+      },
+    },
   });
 
   return level;
@@ -43,15 +43,15 @@ function redirectIfNotRegistered(req, res, next) {
 
 const getCurrentLevel = asyncH(async (req, res, next) => {
   req.currentLevel = await models.Level.findOne({
-    where: { id: req.user.currentLevelId }
+    where: { id: req.user.currentLevelId },
   });
 
   res.locals.levelNo = await models.Level.count({
     where: {
       id: {
-        [Op.lte]: req.currentLevel.id
-      }
-    }
+        [Op.lte]: req.currentLevel.id,
+      },
+    },
   });
 
   next();
@@ -70,14 +70,14 @@ router.get(
         question: req.currentLevel.question,
         sourceHint: req.currentLevel.sourceHint,
         id: req.currentLevel.id,
-        error: false
+        error: false,
       });
     } catch (e) {
       res.locals.error = "An error occurred";
       res.render("play", {
         question: "",
         sourceHint: "",
-        id: "Error"
+        id: "Error",
       });
     }
   })
@@ -94,7 +94,7 @@ router.post(
       return res.render("play", {
         question: req.currentLevel.question,
         sourceHint: req.currentLevel.sourceHint,
-        id: req.currentLevel.id
+        id: req.currentLevel.id,
       });
     }
     if (!/^[a-z0-9]+$/.test(req.body.answer)) {
@@ -103,7 +103,7 @@ router.post(
       return res.render("play", {
         question: req.currentLevel.question,
         sourceHint: req.currentLevel.sourceHint,
-        id: req.currentLevel.id
+        id: req.currentLevel.id,
       });
     }
     return next();
@@ -118,7 +118,7 @@ router.post(
         attempt: req.body.answer,
         UserId: req.user.id,
         LevelId: req.user.currentLevelId,
-        correct: false
+        correct: false,
       };
 
       // Checking mechanism
@@ -147,7 +147,7 @@ router.post(
         res.render("play", {
           question: req.currentLevel.question,
           sourceHint: req.currentLevel.sourceHint,
-          id: req.currentLevel.id
+          id: req.currentLevel.id,
         });
       }
 
@@ -165,8 +165,9 @@ router.get(
   asyncH(async function verifyFinished(req, res, next) {
     if (req.user.finished) {
       const nlevel = await getNextLevel(req.user.currentLevelId);
+      console.log(nlevel);
       if (nlevel) {
-        req.user.currentLevelId = nextLevel.id;
+        req.user.currentLevelId = nlevel.id;
         await req.user.save();
         return res.redirect("/play");
       }
