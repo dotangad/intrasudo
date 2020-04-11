@@ -5,13 +5,13 @@ const models = require("../models");
 const { authenticated, admin } = require("../lib/auth");
 const levelNo = require("../lib/level-no");
 
-const toggleUserProp = prop => [
+const toggleUserProp = (prop) => [
   authenticated(),
   admin(),
   asyncH(async (req, res, next) => {
     try {
       const user = await models.User.findOne({
-        where: { username: req.body.username }
+        where: { username: req.body.username },
       });
       if (!user) {
         return res.redirect("/leaderboard");
@@ -24,7 +24,7 @@ const toggleUserProp = prop => [
     } catch (e) {
       return next(e);
     }
-  })
+  }),
 ];
 
 const roman = {
@@ -34,7 +34,7 @@ const roman = {
   9: "IX",
   10: "X",
   11: "XI",
-  12: "XII"
+  12: "XII",
 };
 
 router.post("/dq", ...toggleUserProp("disqualified"));
@@ -46,7 +46,7 @@ router.get(
   asyncH(async (req, res, next) => {
     try {
       const user = await models.User.findOne({
-        where: { username: req.params.username }
+        where: { username: req.params.username },
       });
 
       if (!user) {
@@ -58,20 +58,20 @@ router.get(
         attempts = (
           await models.Attempt.findAll({
             where: {
-              UserId: req.user.id
+              UserId: user.id,
             },
             include: [
-              { model: models.Level, attributes: ["question", "answer"] }
-            ]
+              { model: models.Level, attributes: ["question", "answer"] },
+            ],
           })
-        ).map(a => {
+        ).map((a) => {
           const time = new Date(a.createdAt);
           return {
             ...a.dataValues,
             date: time.toLocaleDateString("hi-IN"),
             time: time.toLocaleTimeString("hi-IN"),
             level: a.Level.question,
-            correct: a.Level.answer
+            correct: a.Level.answer,
           };
         });
       }
@@ -79,11 +79,11 @@ router.get(
       res.render("user", {
         dUser: {
           ...user.dataValues,
-          class: roman[user.class]
+          class: roman[user.class],
         },
         levelNo: await levelNo(user.currentLevelId),
         lastMoveTime: moment(user.lastMoveTime, "Do MMMM YYYY").fromNow(),
-        attempts
+        attempts,
       });
     } catch (e) {
       return next(e);
