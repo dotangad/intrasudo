@@ -167,6 +167,7 @@ router.get(
       console.log(nlevel);
       if (nlevel) {
         req.user.currentLevelId = nlevel.id;
+        req.user.finished = false;
         await req.user.save();
         return res.redirect("/play");
       }
