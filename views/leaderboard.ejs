@@ -168,6 +168,8 @@
                 <span><%- users[i].name %></span>
                 <% if(users[i].exunite && !exun) { %>
                 <span>[NC]</span>
+                <% } %> <% if(users[i].disqualified) { %>
+                <span>[DQ]</span>
                 <% } %></a
               >
             </td>
