@@ -128,16 +128,15 @@ router.post(
         req.user.points += await points(req.currentLevel);
         if (!nextLevel) {
           req.user.finished = true;
-          await req.user.save();
           res.redirect("/play/fin");
-          await models.Attempt.create(attempt);
-          return;
         }
 
-        req.session.currentLevel = nextLevel;
-        req.session.currentLevelNo += 1;
+        if (nextLevel) {
+          req.session.currentLevel = nextLevel;
+          req.session.currentLevelNo += 1;
+          req.user.currentLevelId = nextLevel.id;
+        }
 
-        req.user.currentLevelId = nextLevel.id;
         attempt.correct = true;
 
         res.redirect("/play");
