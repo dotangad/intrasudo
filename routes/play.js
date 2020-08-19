@@ -5,14 +5,19 @@ const models = require("../models");
 const { authenticated } = require("../lib/auth");
 const comingSoon = require("../lib/coming-soon");
 
-async function points(level) {
-  const solvePos =
-    (await models.Attempt.count({
-      where: { LevelId: level.id, attempt: level.answer },
-    })) + 1;
+// async function points(level) {
+// const solvePos =
+// (await models.Attempt.count({
+// where: { LevelId: level.id, attempt: level.answer },
+// })) + 1;
+//
+// return level.points + level.points / solvePos;
+// }
 
-  return level.points + level.points / solvePos;
+async function points(level) {
+  return level.points;
 }
+
 async function getNextLevel(currentLevelId) {
   const level = await models.Level.findOne({
     where: {
@@ -46,13 +51,14 @@ const getCurrentLevel = asyncH(async (req, res, next) => {
     where: { id: req.user.currentLevelId },
   });
 
-  res.locals.levelNo = await models.Level.count({
-    where: {
-      id: {
-        [Op.lte]: req.currentLevel.id,
+  res.locals.levelNo =
+    (await models.Level.count({
+      where: {
+        id: {
+          [Op.lte]: req.currentLevel.id,
+        },
       },
-    },
-  });
+    })) - 1;
 
   next();
 });
