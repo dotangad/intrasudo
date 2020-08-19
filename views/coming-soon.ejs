@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head.ejs", { title: "Coming Soon" }) %>
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <style>
+      h1 {
+				font-size: 4rem;
+			  margin-bottom: 15px;
+      }
+
+			p {
+				text-align: center;
+				font-size: 1.3rem;
+			}
+    </style>
+
+    <div class="body-container">
+			<div class="flex-container">
+				<div>
+					<h1>Coming Soon</h1>
+					<p><a href="/">Sign up</a> while you wait.</p>
+				</div>
+      </div>
+    </div>
+
+    <%- include("footer.ejs") %>
+  </body>
+</html>
