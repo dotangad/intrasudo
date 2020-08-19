@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 const models = require("../models");
 const { authenticated } = require("../lib/auth");
 const comingSoon = require("../lib/coming-soon");
+const fin = require("../lib/fin");
 
 // async function points(level) {
 // const solvePos =
@@ -70,6 +71,7 @@ router.get(
   redirectIfNotRegistered,
   getCurrentLevel,
   redirectIfFinished,
+  fin(),
   comingSoon(),
   asyncH(async (req, res, next) => {
     try {
@@ -168,6 +170,7 @@ router.post(
 router.get(
   "/fin",
   redirectIfNotRegistered,
+  fin(),
   comingSoon(),
   asyncH(async function verifyFinished(req, res, next) {
     if (req.user.finished) {

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("head.ejs", { title: "Coming Soon" }) %>
+  <%- include("head.ejs", { title: "Fin" }) %>
   <body>
     <%- include("navbar.ejs") %>
 
     <style>
       h1 {
 				font-size: 4rem;
+				text-align: center;
 			  margin-bottom: 15px;
       }
 
@@ -19,12 +20,8 @@
     <div class="body-container">
 			<div class="flex-container">
 				<div>
-					<h1>Coming Soon</h1>
-          <% if(!authenticated) { %>
-						<p><a href="/">Sign up</a> while you wait.</p>
-					<% } else { %>
-						<p><a href="/">Read the instructions</a> while you wait.</p>
-					<% } %>
+					<h1>IntraSudo v1.0 has ended</h1>
+					<p>View the <a href="/leaderboard">leaderboard</a> here.</p>
 				</div>
       </div>
     </div>
