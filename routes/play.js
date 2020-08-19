@@ -3,6 +3,7 @@ const asyncH = require("express-async-handler");
 const { Op } = require("sequelize");
 const models = require("../models");
 const { authenticated } = require("../lib/auth");
+const comingSoon = require("../lib/coming-soon");
 
 async function points(level) {
   const solvePos =
@@ -12,7 +13,6 @@ async function points(level) {
 
   return level.points + level.points / solvePos;
 }
-
 async function getNextLevel(currentLevelId) {
   const level = await models.Level.findOne({
     where: {
@@ -64,6 +64,7 @@ router.get(
   redirectIfNotRegistered,
   getCurrentLevel,
   redirectIfFinished,
+  comingSoon(),
   asyncH(async (req, res, next) => {
     try {
       return res.render("play", {
@@ -161,6 +162,7 @@ router.post(
 router.get(
   "/fin",
   redirectIfNotRegistered,
+  comingSoon(),
   asyncH(async function verifyFinished(req, res, next) {
     if (req.user.finished) {
       const nlevel = await getNextLevel(req.user.currentLevelId);

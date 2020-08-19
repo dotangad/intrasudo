@@ -3,11 +3,13 @@ const asyncH = require("express-async-handler");
 const moment = require("moment");
 const models = require("../models");
 const { authenticated, admin } = require("../lib/auth");
+const comingSoon = require("../lib/coming-soon");
 const levelNo = require("../lib/level-no");
 
 const toggleUserProp = (prop) => [
   authenticated(),
   admin(),
+  comingSoon(),
   asyncH(async (req, res, next) => {
     try {
       const user = await models.User.findOne({
@@ -43,6 +45,7 @@ router.post("/admin", ...toggleUserProp("admin"));
 
 router.get(
   "/:username",
+  comingSoon(),
   asyncH(async (req, res, next) => {
     try {
       const user = await models.User.findOne({

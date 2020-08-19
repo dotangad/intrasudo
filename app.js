@@ -37,8 +37,8 @@ app.use(
     secret: process.env.SECRET || crypto.randomBytes(20).toString("hex"),
     cookie: {
       secure: process.env.NODE_ENV === "production",
-      httpOnly: true
-    }
+      httpOnly: true,
+    },
   })
 );
 
@@ -57,9 +57,9 @@ app.use((req, res, next) => {
 
 app.use("/", routes);
 
-app.get("*", (req, res) => res.render("404"));
+app.get("*", (_, res) => res.render("404"));
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _) => {
   if (process.env.NODE_ENV !== "production") {
     console.log(err);
   }
