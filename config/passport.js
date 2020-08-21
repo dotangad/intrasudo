@@ -10,10 +10,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-      callbackURL:
-        process.env.NODE_ENV !== "production"
-          ? "http://localhost:3143/auth/google/callback"
-          : "https://intra.sudocrypt.com/auth/google/callback",
+      callbackURL: process.env.CALLBACK_URL,
     },
     async function (accessToken, refreshToken, profile, done) {
       try {
