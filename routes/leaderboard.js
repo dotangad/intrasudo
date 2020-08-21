@@ -83,7 +83,7 @@ async function fetchUsers(exunOnly) {
       return {
         ...user.dataValues,
         class: roman[user.class],
-        levelNo: await levelNo(user.currentLevelId),
+        levelNo: (await levelNo(user.currentLevelId)) - 1,
       };
     })
   );
