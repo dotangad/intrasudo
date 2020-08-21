@@ -9,7 +9,7 @@
         display: block;
         margin: 0 auto;
         margin-top: 40px;
-        width: auto;
+        width: 380px;
         padding: 10px 20px;
         font-size: 1.2rem;
         font-weight: 400;
@@ -69,7 +69,8 @@
 
         .signin-btn {
           line-height: 1.5rem;
-          font-size: 0.8rem;
+					font-size: 0.8rem;
+					width: 280px;
         }
       }
       @media screen and (max-width: 350px) {
@@ -82,15 +83,6 @@
     <div class="body-container">
       <div class="flex-container">
         <div>
-          <% if(!authenticated) { %>
-          <div>
-            <h1 style="text-align: center;">Sign in to start playing</h1>
-            <a href="/auth/google" class="signin-btn">
-              <img src="/dpsrkp192.png" alt="DPSRKP" />
-              Sign in with @dpsrkp.net</a
-            >
-          </div>
-          <% } else { %>
           <div>
             <h1 style="text-align: center;">Instructions</h1>
             <ul>
@@ -146,6 +138,14 @@
                 Sudocrypt logo in the top left corner of the page.
               </li>
             </ul>
+          </div>
+          <% if(!authenticated) { %>
+          <div style="margin: 40px 0;">
+            <h1 style="text-align: center;">Sign in to start playing</h1>
+            <a href="/auth/google" class="signin-btn">
+              <img src="/dpsrkp192.png" alt="DPSRKP" />
+              Sign in with @dpsrkp.net</a
+            >
           </div>
           <% }%>
         </div>
