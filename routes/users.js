@@ -81,7 +81,7 @@ router.get(
           ...user.dataValues,
           class: roman[user.class],
         },
-        levelNo: await levelNo(user.currentLevelId),
+        levelNo: (await levelNo(user.currentLevelId)) - 1,
         lastMoveTime: user.lastMoveTime
           ? moment(user.lastMoveTime, "Do MMMM YYYY").fromNow()
           : null,
