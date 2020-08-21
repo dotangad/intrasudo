@@ -141,8 +141,12 @@
               </div>
             </div>
 
-            <div class="last">
-              Last attempt <%- lastMoveTime %>
+						<div class="last">
+							<% if(lastMoveTime) { %>
+                Last attempt <%- lastMoveTime %>
+							<% } else { %>
+							  No attempts yet
+							<% } %>
             </div>
 
             <% if(user.exunite || user.admin) { %>

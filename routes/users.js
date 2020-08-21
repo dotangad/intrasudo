@@ -82,7 +82,9 @@ router.get(
           class: roman[user.class],
         },
         levelNo: await levelNo(user.currentLevelId),
-        lastMoveTime: moment(user.lastMoveTime, "Do MMMM YYYY").fromNow(),
+        lastMoveTime: user.lastMoveTime
+          ? moment(user.lastMoveTime, "Do MMMM YYYY").fromNow()
+          : null,
         attempts,
       });
     } catch (e) {
