@@ -60,6 +60,7 @@ router.get(
             where: {
               UserId: user.id,
             },
+            order: [["createdAt", "DESC"]],
             include: [
               { model: models.Level, attributes: ["question", "answer"] },
             ],
