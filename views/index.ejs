@@ -1,161 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("head.ejs", { title }) %>
-  <body>
-    <%- include("navbar.ejs") %>
+<%- include("head.ejs", { title }) %>
 
-    <style>
-      .signin-btn {
-        display: block;
-        margin: 0 auto;
-        margin-top: 40px;
-        width: 380px;
-        padding: 10px 20px;
-        font-size: 1.2rem;
-        font-weight: 400;
-        font-family: "Sen", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-        text-transform: uppercase;
-        line-height: 2rem;
-        text-decoration: none;
-        background: #fff;
-        border-radius: 2px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 7px 0px 0px #9a9a9a;
-        -webkit-box-shadow: 0px 7px 0px 0px #9a9a9a;
-        -moz-box-shadow: 0px 7px 0px 0px #9a9a9a;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
+<body>
+  <%- include("navbar.ejs") %>
 
-      .signin-btn:focus {
-        transform: translateY(7px);
-        box-shadow: none;
+  <style>
+    .signin-btn {
+      display: block;
+      margin: 0 auto;
+      margin-top: 40px;
+      width: 380px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-family: "Sen", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      text-transform: uppercase;
+      line-height: 2rem;
+      text-decoration: none;
+      background: #fff;
+      border-radius: 2px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 7px 0px 0px #9a9a9a;
+      -webkit-box-shadow: 0px 7px 0px 0px #9a9a9a;
+      -moz-box-shadow: 0px 7px 0px 0px #9a9a9a;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .signin-btn:focus {
+      transform: translateY(7px);
+      box-shadow: none;
+    }
+
+    .signin-btn img {
+      height: 2rem;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    ul {
+      margin-top: 30px;
+      max-width: 500px;
+      list-style-type: none;
+    }
+
+    ul li {
+      margin: 10px 0;
+      text-align: justify;
+      font-size: 1.1rem;
+    }
+
+    @media screen and (max-width: 450px) {
+      h1 {
+        font-size: 1.4rem;
       }
 
       .signin-btn img {
-        height: 2rem;
-        width: auto;
-        margin-right: 10px;
+        height: 1.5rem;
       }
 
+      .signin-btn {
+        line-height: 1.5rem;
+        font-size: 0.8rem;
+        width: 280px;
+      }
+    }
+
+    @media screen and (max-width: 350px) {
       h1 {
-        font-size: 2rem;
+        font-size: 1.3rem;
       }
+    }
+  </style>
 
-      ul {
-        margin-top: 30px;
-        max-width: 500px;
-        list-style-type: none;
-      }
-
-      ul li {
-        margin: 10px 0;
-        text-align: justify;
-        font-size: 1.1rem;
-      }
-
-      @media screen and (max-width: 450px) {
-        h1 {
-          font-size: 1.4rem;
-        }
-
-        .signin-btn img {
-          height: 1.5rem;
-        }
-
-        .signin-btn {
-          line-height: 1.5rem;
-					font-size: 0.8rem;
-					width: 280px;
-        }
-      }
-      @media screen and (max-width: 350px) {
-        h1 {
-          font-size: 1.3rem;
-        }
-      }
-    </style>
-
-    <div class="body-container">
-      <div class="flex-container">
+  <div class="body-container">
+    <div class="flex-container">
+      <div>
         <div>
-          <div>
-            <h1 style="text-align: center;">Instructions</h1>
-            <ul>
-              <li>
-                The hunt shall commence on 2:00 PM 21st August 2020 and will
-                continue till 8:00 PM 22nd August 2020.
-              </li>
-              <li>
-                All participants are recommended to read the
-                <a
-                  href="https://docs.google.com/document/d/1bpeRtE2YC09lHyKIuPUFJkxxp1gfuPPvRneCMJxPv7U/edit"
-                  >Cryptic Hunt resources</a
-                >
-              </li>
-              <li>
-                The event encompasses an Online Cryptic Treasure Hunt in which
-                participants must make their way through a series of cryptic
-                levels.
-              </li>
-              <li>
-                The participant's aim is to crack the levels as quickly as they
-                can so as to place themselves at the top of the leaderboard.
-              </li>
-              <li>
-                At each level, the participants will encounter a number of clues
-                which shall all, together, point to one answer. Each level has
-                one correct answer.
-              </li>
-              <li>
-								Official clues may be released on the
-								<a href="https://www.facebook.com/sudocrypt/"
-					      >Sudocrypt Facebook Page</a> if and when deemed necessary by
-				        the admins.
-              </li>
-              <li>
-								Lead confirmations will be done via the
-								<a href="https://facebook.com/sudocrypt/"
-								>Sudocrypt Facebook Page</a> itself.
-              </li>
-              <li>
-                Answers will always be lower-case, alphanumeric and will contain
-                no spaces. Special characters are allowed. For example, if the
-                answer is Big Bang, you would type it in as “bigbang”.
-              </li>
-              <li>
-                Every clue in the question is important. If it wasn't important,
-                it wouldn't be there.
-              </li>
-              <li>Beware of the spelling you enter, we do not auto correct.</li>
-              <li>
-                And if it was not obvious, team play, answer sharing, hint
-                sharing and collaborating with other competitors in general is
-                not allowed and any such evidence can lead to disqualification.
-              </li>
-              <li>
-                You can come back to this page any time by clicking on the
-                Sudocrypt logo in the top left corner of the page.
-              </li>
-            </ul>
-          </div>
-          <% if(!authenticated) { %>
-          <div style="margin: 40px 0;">
-            <h1 style="text-align: center;">Sign in to start playing</h1>
-            <a href="/auth/google" class="signin-btn">
-              <img src="/dpsrkp192.png" alt="DPSRKP" />
-              Sign in with @dpsrkp.net</a
-            >
-          </div>
-          <% }%>
+          <h1 style="text-align: center;">Instructions</h1>
+          <ul>
+            <li>
+              The hunt shall commence on 2:00 PM 21st August 2020 and will
+              continue till 8:00 PM 22nd August 2020.
+            </li>
+            <li>
+              All participants are recommended to read the
+              <a href="https://docs.google.com/document/d/1bpeRtE2YC09lHyKIuPUFJkxxp1gfuPPvRneCMJxPv7U/edit">Cryptic
+                Hunt resources</a>
+            </li>
+            <li>
+              The event encompasses an Online Cryptic Treasure Hunt in which
+              participants must make their way through a series of cryptic
+              levels.
+            </li>
+            <li>
+              The participant's aim is to crack the levels as quickly as they
+              can so as to place themselves at the top of the leaderboard.
+            </li>
+            <li>
+              At each level, the participants will encounter a number of clues
+              which shall all, together, point to one answer. Each level has
+              one correct answer.
+            </li>
+            <li>
+              Official clues may be released on the
+              <a href="https://www.facebook.com/sudocrypt/">Sudocrypt Facebook Page</a> if and when deemed necessary by
+              the admins.
+            </li>
+            <li>
+              Lead confirmations will be done via the
+              <a href="https://facebook.com/sudocrypt/">Sudocrypt Facebook Page</a> itself.
+            </li>
+            <li>
+              Answers will always be lower-case, alphanumeric and will contain
+              no spaces. Special characters are allowed. For example, if the
+              answer is Big Bang, you would type it in as “bigbang”.
+            </li>
+            <li>
+              Every clue in the question is important. If it wasn't important,
+              it wouldn't be there.
+            </li>
+            <li>Beware of the spelling you enter, we do not auto correct.</li>
+            <li>
+              And if it was not obvious, team play, answer sharing, hint
+              sharing and collaborating with other competitors in general is
+              not allowed and any such evidence can lead to disqualification.
+            </li>
+            <li>
+              You can come back to this page any time by clicking on the
+              Sudocrypt logo in the top left corner of the page.
+            </li>
+          </ul>
         </div>
+        <% if(!authenticated) { %>
+        <div style="margin: 40px 0;">
+          <h1 style="text-align: center;">Sign in to start playing</h1>
+          <div>
+            <a href="/auth/login" class="signin-btn">
+              <img src="/dpsrkp192.png" alt="DPSRKP" />
+              Login</a>
+          </div>
+          <div>
+            <a href="/auth/register" class="signin-btn">
+              <img src="/dpsrkp192.png" alt="DPSRKP" />
+              Register</a>
+          </div>
+        </div>
+        <% }%>
       </div>
     </div>
+  </div>
 
-    <%- include("footer.ejs") %>
-  </body>
+  <%- include("footer.ejs") %>
+</body>
+
 </html>

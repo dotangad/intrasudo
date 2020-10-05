@@ -36,6 +36,16 @@ module.exports = [
                 }
             );
 
+            if (user) {
+                return req.logIn(user, (err) => {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    return res.status(200).redirect("/play");
+                });
+            }
+
             // if (user.approved) {
             //     // Login and send to dashboard
             //     return req.login(school, (err) => {
@@ -45,7 +55,7 @@ module.exports = [
             //     });
             // }
 
-            return res.render("auth/email-verify", { title: "Email verified" });
+            // return res.render("auth/email-verify", { title: "Email verified" });
         } catch (e) {
             return next(e);
         }
