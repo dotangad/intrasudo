@@ -72,8 +72,8 @@
   }
 
   .next-text {
-    text-align: right;
-    margin-top: 10px;
+    text-align: center;
+    margin: 10px 0;
     font-size: 14px;
   }
 </style>
@@ -103,12 +103,11 @@
           <% if(error) { %>
           <div class="err"><%- error %></div>
           <% } %>
-
-          <div class="btn-container">
-            <button type="submit">Play</button>
-          </div>
           <div class="next-text">
             <a href="/auth/login">Already have an account?</a>
+          </div>
+          <div class="btn-container">
+            <button type="submit">Play</button>
           </div>
         </form>
       </div>
