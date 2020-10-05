@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../head.ejs", {title: "Register"}) %>
+  <style>
+    .avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar img {
+      height: 200px;
+      width: 200px;
+      object-fit: cover;
+      border: none;
+      border-radius: 900px;
+    }
+
+    .avatar .name {
+      text-align: center;
+      margin: 20px 0;
+      letter-spacing: 2px;
+      font-size: 2rem;
+      font-weight: 400;
+      font-size: "Sen", system-ui;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .avatar .email {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    #class-section {
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    select {
+      width: 45%;
+      border: 2px solid #222;
+      background: #1f2225;
+      color: #eaeaef;
+      height: calc(1.7rem + 20px);
+      transition: border-color 0.2s ease;
+      font-size: 1rem;
+    }
+    select:focus {
+      outline: none;
+      border-color: 2px solid #2977f5;
+    }
+
+    label.class-section {
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+    }
+    label.class-section span {
+      width: 45%;
+    }
+
+    .err {
+      color: red;
+      margin: 20px 0;
+      text-align: center;
+      width: 300px;
+    }
+  </style>
+  <body>
+    <%- include("../navbar.ejs") %>
+
+    <div class="body-container">
+      <div class="flex-container">
+        <div>
+
+          <form action="/auth/login" method="post">
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+            <%- include("../partials/text-input-group.ejs", { inputname: "email",
+            label: "Email", placeholder: "abc@xyz.com", type: "email" }) %>
+            <%- include("../partials/text-input-group.ejs", { inputname: "password",
+            label: "Password", placeholder: "**********", type: "password" }) %>
+            <% if(error) { %>
+                <div class="err"><%- error %></div>
+                <% } %>
+
+            <div class="btn-container">
+              <button type="submit">Play</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../footer.ejs") %>
+  </body>
+</html>

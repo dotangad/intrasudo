@@ -40,7 +40,7 @@ function redirectIfFinished(req, res, next) {
 }
 
 function redirectIfNotRegistered(req, res, next) {
-  if (!req.user.phone) {
+  if (!req.user.email) {
     return res.redirect("/initial");
   }
 

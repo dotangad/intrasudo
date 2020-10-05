@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../head.ejs", {title: "Registration Successful"}) %>
+  <style>
+    .content {
+      padding: 0;
+    }
+    .content > div {
+      min-height: inherit;
+      height: 100%;
+      padding: 20px;
+    }
+    .box {
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+      text-align: center;
+    }
+    p {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .content a {
+      font-weight: bold;
+      font-size: inherit;
+    }
+    .checkmark-container {
+      margin-bottom: 20px;
+      --dim: 150px;
+    }
+    .flex-container {
+        flex-direction: column !important;
+    }
+  </style>
+<body>
+  <%- include("../navbar.ejs") %>
+  <div class="body-container">
+    <div class="flex-container">
+      <%- include("../partials/checkmark.ejs") %>
+      <div>
+        Please check your email for a verification link. If you have not recieved it, please check your spam folder.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

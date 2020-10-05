@@ -13,12 +13,16 @@ module.exports = (sequelize, DataTypes) => {
 			//phone: DataTypes.STRING,
 			points: DataTypes.INTEGER,
 			lastMoveTime: DataTypes.DATE,
-			email: DataTypes.STRING,
+			email: {
+				type: DataTypes.STRING,
+				unique: true,
+			},
 			username: {
 				type: DataTypes.STRING,
 				unique: true,
 				allowNull: false
 			},
+			password: DataTypes.STRING,
 			disqualified: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false
