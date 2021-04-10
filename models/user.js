@@ -7,36 +7,34 @@ module.exports = (sequelize, DataTypes) => {
       googleId: DataTypes.STRING,
       class: DataTypes.INTEGER,
       section: DataTypes.STRING,
-      photo: DataTypes.STRING,
+      photo: DataTypes.TEXT,
       phone: DataTypes.STRING,
       points: DataTypes.INTEGER,
       lastMoveTime: DataTypes.DATE,
       email: DataTypes.STRING,
       username: {
         type: DataTypes.STRING,
-        unique: true,
-        allowNull: false
       },
       disqualified: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       admin: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       exunite: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       finished: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     {}
   );
-  User.associate = function(models) {
+  User.associate = function (models) {
     User.hasMany(models.Attempt);
     User.belongsTo(models.Level, { foreignKey: "currentLevelId" });
   };

@@ -2,9 +2,9 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn("Users", "photo", {
-      type: Sequelize.STRING
-    });
+    return Promise.all([
+      queryInterface.addColumn("Users", "photo", Sequelize.TEXT),
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {
@@ -15,6 +15,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.removeColumn("Users", "photo");
-  }
+    return Promise.all([queryInterface.removeColumn("Users", "photo")]);
+  },
 };

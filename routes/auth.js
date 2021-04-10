@@ -9,16 +9,16 @@ router.get(
     scope: [
       "https://www.googleapis.com/auth/plus.login",
       "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/userinfo.profile"
-    ]
+      "https://www.googleapis.com/auth/userinfo.profile",
+    ],
   })
 );
 
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  function(req, res) {
-    if (req.user.class) {
+  function (req, res) {
+    if (req.user.username) {
       res.redirect("/");
     } else {
       res.redirect("/auth/initial");
@@ -32,7 +32,7 @@ router.get("/initial", authenticated(), (req, res) =>
     phone: req.user.phone || "",
     username: req.user.username,
     sction: req.user.section || "",
-    clss: req.user.class || ""
+    clss: req.user.class || "",
   })
 );
 

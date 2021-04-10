@@ -5,12 +5,12 @@ module.exports = {
     return Promise.all([
       queryInterface.addColumn("Users", "admin", {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       }),
       queryInterface.addColumn("Users", "exunite", {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
-      })
+        defaultValue: false,
+      }),
     ]);
   },
 
@@ -24,7 +24,7 @@ module.exports = {
     */
     return Promise.all([
       queryInterface.removeColumn("Users", "admin"),
-      queryInterface.removeColumn("Users", "exunite")
+      queryInterface.removeColumn("Users", "exunite"),
     ]);
-  }
+  },
 };

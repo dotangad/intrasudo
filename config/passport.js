@@ -17,6 +17,13 @@ passport.use(
         const photo = profile.photos[profile.photos.length - 1].value;
         const email = profile.emails[0].value;
 
+        const match = profile.displayName.match(/(\d+) ?([A-Z])$/m);
+        let class_, section;
+        if (match && match[1] && match[2]) {
+          class_ = match[1];
+          section = match[2];
+        }
+
         const user = await models.User.findOne({
           where: { googleId: profile.id },
         });
@@ -35,10 +42,11 @@ passport.use(
           const newUser = await models.User.create({
             name: profile.displayName,
             googleId: profile.id,
-            email: email,
-            photo: photo,
-            username: crypto.randomBytes(10).toString("hex"),
+            email,
+            photo,
             points: 0,
+            class: class_,
+            section,
             currentLevelId: currentLevelId.id,
           });
 
@@ -52,6 +60,7 @@ passport.use(
 
         return done(null, user, "Logged in");
       } catch (err) {
+        console.errror(err);
         done(err);
       }
     }

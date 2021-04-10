@@ -14,15 +14,11 @@ module.exports = {
       queryInterface.addColumn("Users", "phone", Sequelize.STRING),
       queryInterface.addColumn("Users", "points", Sequelize.INTEGER),
       queryInterface.addColumn("Users", "lastMoveTime", Sequelize.DATE),
-      queryInterface.addColumn("Users", "username", {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-      }),
+      queryInterface.addColumn("Users", "username", Sequelize.STRING),
       queryInterface.addColumn("Users", "disqualified", {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
-      })
+        defaultValue: false,
+      }),
     ]);
   },
 
@@ -38,7 +34,7 @@ module.exports = {
       queryInterface.removeColumn("Users", "phone"),
       queryInterface.removeColumn("Users", "points"),
       queryInterface.removeColumn("Users", "lastMoveTime"),
-      queryInterface.removeColumn("Users", "disqualified")
+      queryInterface.removeColumn("Users", "disqualified"),
     ]);
-  }
+  },
 };
