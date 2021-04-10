@@ -53,6 +53,7 @@ async function fetchUsers(exunOnly) {
     "section",
     "photo",
     "points",
+    "lastMoveTime",
     "currentLevelId",
     "username",
     "disqualified",
@@ -60,7 +61,7 @@ async function fetchUsers(exunOnly) {
     "exunite",
     "finished",
   ];
-  const order = [["points", "DESC"]];
+  const order = [["points", "DESC"],["lastMoveTime","ASC"]];
   const where = { admin: false };
 
   let users = [];
