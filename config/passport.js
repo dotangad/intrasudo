@@ -2,7 +2,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const { Op } = require("sequelize");
 const models = require("../models");
-const crypto = require("crypto");
+const randomWords = require("random-words");
 
 passport.use(
   "google",
@@ -12,7 +12,7 @@ passport.use(
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,
     },
-    async function (accessToken, refreshToken, profile, done) {
+    async function (_accessToken, _refreshToken, profile, done) {
       try {
         const photo = profile.photos[profile.photos.length - 1].value;
         const email = profile.emails[0].value;
@@ -60,7 +60,7 @@ passport.use(
 
         return done(null, user, "Logged in");
       } catch (err) {
-        console.errror(err);
+        console.error(err);
         done(err);
       }
     }

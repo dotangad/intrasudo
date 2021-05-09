@@ -27,11 +27,13 @@
     "express-async-handler": "^1.1.4",
     "express-session": "^1.17.0",
     "helmet": "^3.21.3",
+    "isomorphic-fetch": "^3.0.0",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
+    "random-words": "^1.1.1",
     "redis": "^3.0.2",
     "sequelize": "^5.21.5"
   },

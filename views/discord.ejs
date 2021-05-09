@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head.ejs", {title: "Connect to Discord"}) %>
+  <body>
+    <%- include("navbar.ejs") %>
+
+    <div class="body-container">
+      <div class="flex-container">
+        <div>
+          <p style="margin-bottom: 10px">
+            Join our Discord server and connect your Discord account to play.
+          </p>
+          <div class="btn-container" style="width: 100%">
+            <a class="button" href="<%= discord_url %>">Connect to Discord</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include("footer.ejs") %>
+  </body>
+</html>

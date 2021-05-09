@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       points: DataTypes.INTEGER,
       lastMoveTime: DataTypes.DATE,
       email: DataTypes.STRING,
+      discordId: DataTypes.STRING,
+      discordUsername: DataTypes.STRING,
+      discordEmail: DataTypes.STRING,
+      discordDiscriminator: DataTypes.STRING,
       username: {
         type: DataTypes.STRING,
       },

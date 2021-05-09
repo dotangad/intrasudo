@@ -2,6 +2,8 @@ const router = require("express").Router();
 const asyncH = require("express-async-handler");
 const passport = require("passport");
 const { authenticated } = require("../lib/auth");
+const discord = require("../lib/discord");
+const models = require("../models");
 
 router.get(
   "/google",
@@ -99,6 +101,40 @@ router.get("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
   res.redirect("/");
+});
+
+router.get("/discord", authenticated(), (req, res) => {
+  res.render("discord", {
+    discord_url: discord.authorizationURL(req.user.googleId),
+  });
+});
+
+router.get("/discord/callback", async (req, res, next) => {
+  try {
+    const { code, state } = req.query;
+
+    if (state !== req.user.googleId) {
+      const err = new Error("Invalid state");
+
+      return next(err);
+    }
+
+    const { access_token } = await discord.codeExchange(code);
+    const { id, username, discriminator, email } = await discord.getUserData(
+      access_token
+    );
+
+    req.user.discordId = id;
+    req.user.discordUsername = username;
+    req.user.discordDiscriminator = discriminator;
+    req.user.discordEmail = email;
+    await req.user.save();
+
+    res.redirect("/play");
+  } catch (e) {
+    console.error(e);
+    return next(e);
+  }
 });
 
 module.exports = router;

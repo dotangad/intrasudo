@@ -2,7 +2,7 @@ const router = require("express").Router();
 const asyncH = require("express-async-handler");
 const { Op } = require("sequelize");
 const models = require("../models");
-const { authenticated } = require("../lib/auth");
+const { authenticated, discordVerified } = require("../lib/auth");
 const comingSoon = require("../lib/coming-soon");
 const fin = require("../lib/fin");
 
@@ -65,6 +65,7 @@ const getCurrentLevel = asyncH(async (req, res, next) => {
 });
 
 router.use(authenticated());
+router.use(discordVerified());
 
 router.get(
   "/",

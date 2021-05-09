@@ -66,7 +66,11 @@
       <div class="flex-container">
         <div class="card">
           <div class="img">
-            <img src="<%- dUser.photo %>" alt="<%- dUser.name %>" style="object-fit: cover;" />
+            <img
+              src="<%- dUser.photo %>"
+              alt="<%- dUser.name %>"
+              style="object-fit: cover"
+            />
             <div class="name"><%- dUser.name %></div>
             <div class="username">@<%- dUser.username %></div>
             <% if(dUser.exunite || dUser.admin || dUser.disqualified) { %>
@@ -118,7 +122,7 @@
                   ></path>
                 </svg>
                 <%- levelNo %> <% if(dUser.finished) { %>
-                <span style="margin-left: 5px;">&#127937;</span>
+                <span style="margin-left: 5px">&#127937;</span>
                 <% } %>
               </div>
               <div class="points">
@@ -141,24 +145,24 @@
               </div>
             </div>
 
-						<div class="last">
-							<% if(lastMoveTime) { %>
-                Last attempt <%- lastMoveTime %>
-							<% } else { %>
-							  No attempts yet
-							<% } %>
+            <div class="last">
+              <% if(lastMoveTime) { %> Last attempt <%- lastMoveTime %> <% }
+              else { %> No attempts yet <% } %>
             </div>
 
             <% if(user.exunite || user.admin) { %>
-            <div class="email" style="text-align: center;">
+            <div class="email" style="text-align: center">
               <%- dUser.email %>
             </div>
-            <div class="phone" style="text-align: center;">
+            <div class="phone" style="text-align: center">
               <%- dUser.phone %>
+            </div>
+            <div class="phone" style="text-align: center">
+              @<%- dUser.discordUsername %>#<%- dUser.discordDiscriminator %>
             </div>
             <% } %> <% if(user.admin) { %>
             <div class="buttons">
-              <form action="" method="post" style="display: none;" id="submit">
+              <form action="" method="post" style="display: none" id="submit">
                 <input
                   type="hidden"
                   name="username"
@@ -192,7 +196,7 @@
       </div>
 
       <% if(user.admin) { %>
-      <h1 style="text-align: center; margin-top: 50px;">Attempts</h1>
+      <h1 style="text-align: center; margin-top: 50px">Attempts</h1>
       <table>
         <thead>
           <tr>
@@ -224,8 +228,8 @@
     <script>
       const form = document.querySelector("form#submit");
 
-      document.querySelectorAll(".buttons a").forEach(e_ =>
-        e_.addEventListener("click", e => {
+      document.querySelectorAll(".buttons a").forEach((e_) =>
+        e_.addEventListener("click", (e) => {
           e.preventDefault();
           form.setAttribute("action", e.target.href);
           form.submit();
