@@ -18,7 +18,6 @@ const roman = {
 
 router.get(
   "/",
-  comingSoon(),
   asyncH(async (_, res, next) => {
     try {
       const users = await fetchUsers(false);
@@ -61,7 +60,10 @@ async function fetchUsers(exunOnly) {
     "exunite",
     "finished",
   ];
-  const order = [["points", "DESC"],["lastMoveTime","ASC"]];
+  const order = [
+    ["points", "DESC"],
+    ["lastMoveTime", "ASC"],
+  ];
   const where = { admin: false };
 
   let users = [];
