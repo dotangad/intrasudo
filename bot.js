@@ -29,7 +29,7 @@ const verification = async (message) => {
 
       // Add the role!
       await member.roles.add(role);
-      await member.setNickname(user.name)
+      await member.setNickname(user.name);
       message.channel.send(`${author.toString()} verified`);
       return;
     }
@@ -66,7 +66,7 @@ const lookup = async (message) => {
       return;
     }
 
-    message.channel.send(`https://intra.sudocrypt.com/${user.username}`);
+    message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
   } catch (e) {
     message.channel.send(`${message.author.toString()} an error occurred`);
     console.error(e);
