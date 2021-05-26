@@ -29,6 +29,7 @@ const verification = async (message) => {
 
       // Add the role!
       await member.roles.add(role);
+      await member.setNickname(user.name)
       message.channel.send(`${author.toString()} verified`);
       return;
     }
