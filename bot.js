@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const Discord = require("discord.js");
+const levelNo = require("./lib/level-no");
 const client = new Discord.Client();
 
 const models = require("./models");
@@ -66,7 +67,22 @@ const lookup = async (message) => {
       return;
     }
 
-    message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
+    // message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
+    message.channel.send({
+      embed: {
+        title: user.username,
+        fields: [
+          {
+            title: "Level",
+            value: (await levelNo(user.currentLevelId)) - 1,
+          },
+          {
+            title: "Points",
+            value: `${user.points}`,
+          },
+        ],
+      },
+    });
   } catch (e) {
     message.channel.send(`${message.author.toString()} an error occurred`);
     console.error(e);
