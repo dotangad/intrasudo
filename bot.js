@@ -102,9 +102,10 @@ const lookup = async (message) => {
   }
 };
 
-client.on("message", (message) => {
-  if (message.channel.name === "verification") verification(message);
-  if (message.channel.name === "discord-lookup") lookup(message);
+client.on("message", (messageContent) => {
+  if (messageContent.channel.name === "verification")
+    verification(messageContent);
+  if (messageContent.channel.name === "discord-lookup") lookup(messageContent);
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
