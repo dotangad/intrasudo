@@ -68,21 +68,36 @@ const lookup = async (message) => {
     }
 
     // message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
-    message.channel.send({
-      embed: {
-        title: user.username,
-        fields: [
-          {
-            title: "Level",
-            value: (await levelNo(user.currentLevelId)) - 1,
-          },
-          {
-            title: "Points",
-            value: `${user.points}`,
-          },
-        ],
-      },
-    });
+    const userEmbed = new Discord.MessageEmbed()
+      .setTitle(user.username)
+      .addFields(
+        {
+          title: "Name",
+          value: user.name,
+        },
+        {
+          title: "Email",
+          value: user.email,
+        },
+        {
+          title: "Phone",
+          value: user.phone,
+        },
+        {
+          title: "Level",
+          value: (await levelNo(user.currentLevelId)) - 1,
+        },
+        {
+          title: "Finished",
+          value: user.finished ? "Yes" : "No",
+        },
+        {
+          title: "Points",
+          value: `${user.points}`,
+        }
+      )
+      .setImage(user.photo);
+    message.channel.send(userEmbed);
   } catch (e) {
     message.channel.send(`${message.author.toString()} an error occurred`);
     console.error(e);
