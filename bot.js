@@ -96,7 +96,8 @@ const lookup = async (message) => {
           value: `${user.points}`,
         }
       )
-      .setImage(user.photo);
+      .setURL(`https://intra.sudocrypt.com/users/${user.username}`)
+      .setThumbnail(user.photo);
     message.channel.send(userEmbed);
   } catch (e) {
     message.channel.send(`${message.author.toString()} an error occurred`);
