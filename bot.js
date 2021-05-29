@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const Discord = require("discord.js");
+const { decodeUsername } = require("./lib/discord");
 const levelNo = require("./lib/level-no");
 const client = new Discord.Client();
 
@@ -47,11 +48,7 @@ const verification = async (message) => {
 const lookup = async (message) => {
   try {
     if (!message.content.startsWith("!lookup")) return;
-    const [username, discriminator] = message.content
-      .split(" ")
-      .pop()
-      .split("#")
-      .map((x) => x.trim());
+    const [username, discriminator] = decodeUsername(message.content);
 
     const user = await models.User.findOne({
       where: {
