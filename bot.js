@@ -72,27 +72,27 @@ const lookup = async (message) => {
       .setTitle(user.username)
       .addFields(
         {
-          title: "Name",
+          name: "Name",
           value: user.name,
         },
         {
-          title: "Email",
+          name: "Email",
           value: user.email,
         },
         {
-          title: "Phone",
+          name: "Phone",
           value: user.phone,
         },
         {
-          title: "Level",
+          name: "Level",
           value: (await levelNo(user.currentLevelId)) - 1,
         },
         {
-          title: "Finished",
+          name: "Finished",
           value: user.finished ? "Yes" : "No",
         },
         {
-          title: "Points",
+          name: "Points",
           value: `${user.points}`,
         }
       )
