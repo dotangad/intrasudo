@@ -122,9 +122,7 @@ const dq = async (message) => {
     }
 
     user.disqualified = true;
-    const discordUser = message.guild.members.cache.find(
-      (member) => member.id === user.discordId
-    );
+    const discordUser = await message.guild.members.fetch(user.discordId);
     await user.save();
     await discordUser.kick();
 
