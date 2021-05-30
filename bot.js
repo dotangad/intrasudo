@@ -122,11 +122,9 @@ const dq = async (message) => {
     }
 
     user.disqualified = true;
-    const discordUser = message.guild.members.cache.find(
-      (member) => member.id === user.discordId
-    );
+    const discordUser = message.guild.members.cache.get(user.discordId);
     await user.save();
-    await message.guild.ban(discordUser);
+    await discordUser.kick();
 
     // message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
     message.channel.send(`Successfully disqualified and banned ${user.name}`);
