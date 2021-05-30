@@ -102,9 +102,41 @@ const lookup = async (message) => {
   }
 };
 
+const dq = async (message) => {
+  try {
+    if (!message.content.startsWith("!dq")) return;
+    const [username, discriminator] = decodeUsername(message.content);
+
+    const user = await models.User.findOne({
+      where: {
+        discordUsername: username,
+        discordDiscriminator: discriminator,
+      },
+    });
+
+    if (!user) {
+      message.channel.send(
+        `User with username ${username}, discrimator ${discriminator} not found`
+      );
+      return;
+    }
+
+    user.disqualified = true;
+    message.guild.members.cache.find((member) => member.id === user.discordId);
+    await user.save();
+
+    // message.channel.send(`https://intra.sudocrypt.com/users/${user.username}`);
+    message.channel.send(`Successfully disqualified and banned ${user.name}`);
+  } catch (e) {
+    message.channel.send(`${message.author.toString()} an error occurred`);
+    console.error(e);
+  }
+};
+
 client.on("message", (message) => {
   if (message.channel.name === "verification") verification(message);
   if (message.channel.name === "discord-lookup") lookup(message);
+  if (message.channel.name === "dq") dq(message);
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
