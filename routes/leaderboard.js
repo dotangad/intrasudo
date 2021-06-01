@@ -4,7 +4,6 @@ const { Op } = require("sequelize");
 const models = require("../models");
 const { authenticated, exunite } = require("../lib/auth");
 const levelNo = require("../lib/level-no");
-const comingSoon = require("../lib/coming-soon");
 
 const roman = {
   6: "VI",
@@ -33,7 +32,6 @@ router.get(
   "/exun",
   authenticated(),
   exunite(),
-  comingSoon(),
   asyncH(async (req, res, next) => {
     try {
       const users = await fetchUsers(true);
