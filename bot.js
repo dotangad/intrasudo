@@ -134,10 +134,27 @@ const dq = async (message) => {
   }
 };
 
+const botCommands = async (message) => {
+  try {
+    if (!message.content.startsWith("!leaderboardCount")) return;
+    const count = await models.Users.count({
+      where: {
+        admin: false,
+        exunite: false,
+      },
+    });
+    message.channel.send(`There are ${count} people`);
+  } catch (e) {
+    message.channel.send(`${message.author.toString()} an error occurred`);
+    console.error(e);
+  }
+};
+
 client.on("message", (message) => {
   if (message.channel.name === "verification") verification(message);
   if (message.channel.name === "discord-lookup") lookup(message);
   if (message.channel.name === "dq") dq(message);
+  if (message.channel.name === "bot-commands") botCommands(message);
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
