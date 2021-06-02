@@ -37,7 +37,7 @@ const verification = async (message) => {
     }
 
     message.channel.send(
-      `${author.toString()} please verify your Discord account on https://intra.sudocrypt.com`
+      `${author.toString()} please verify your Discord account on https://intra.sudocrypt.com/auth/discord`
     );
   } catch (e) {
     message.channel.send(`${message.author.toString()} an error occurred`);
