@@ -137,7 +137,7 @@ const dq = async (message) => {
 const botCommands = async (message) => {
   try {
     if (!message.content.startsWith("!leaderboardCount")) return;
-    const count = await models.Users.count({
+    const count = await models.User.count({
       where: {
         admin: false,
         exunite: false,
