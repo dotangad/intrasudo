@@ -5,6 +5,27 @@
     <%- include("navbar.ejs") %>
 
     <style>
+      * {
+        word-wrap: break-word;
+      }
+
+      .body-container {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 100vw;
+      }
+
+      table {
+        width: 1000px;
+        border-collapse: collapse;
+        margin: 20px auto;
+      }
+
+      .new {
+        width: 1000px;
+        margin: 50px auto;
+      }
+
       form .input input {
         width: 500px;
       }
@@ -22,11 +43,6 @@
 
       form .half .input input {
         width: 100%;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
       }
 
       thead tr {
@@ -130,7 +146,7 @@
         </tbody>
       </table>
 
-      <div class="new" style="margin-top: 50px;">
+      <div class="new" style="margin-top: 50px">
         <h2>New Level</h2>
         <form action="/levels/new" method="post">
           <input type="hidden" name="_csrf" value="<%- csrfToken %>" />

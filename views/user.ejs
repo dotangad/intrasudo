@@ -5,10 +5,20 @@
     <%- include("navbar.ejs") %> <%- include("styles/user-card.ejs") %>
 
     <style>
+      * {
+        word-wrap: break-word;
+      }
+
+      .body-container {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 100vw;
+      }
+
       table {
-        width: 100%;
+        width: 1000px;
         border-collapse: collapse;
-        margin: 20px;
+        margin: 20px auto;
       }
 
       thead tr {
@@ -54,10 +64,10 @@
       }
 
       td {
-        width: 10%;
+        width: 100px;
       }
       td:nth-child(1) {
-        width: 60%;
+        width: 600px;
         text-align: left;
       }
     </style>

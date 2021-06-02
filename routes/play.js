@@ -31,7 +31,7 @@ async function getNextLevel(currentLevelId) {
   return level;
 }
 
-function redirectIfFinished(req, res, next) {
+async function redirectIfFinished(req, res, next) {
   if (req.user.finished) {
     res.redirect("/play/fin");
   } else {
@@ -64,6 +64,8 @@ const getCurrentLevel = asyncH(async (req, res, next) => {
   next();
 });
 
+router.use(fin());
+router.use(comingSoon());
 router.use(authenticated());
 router.use(discordVerified());
 
@@ -72,8 +74,6 @@ router.get(
   redirectIfNotRegistered,
   getCurrentLevel,
   redirectIfFinished,
-  fin(),
-  comingSoon(),
   asyncH(async (req, res, next) => {
     try {
       return res.render("play", {
@@ -133,23 +133,30 @@ router.post(
 
       // Checking mechanism
       if (req.currentLevel.answer === req.body.answer) {
-        const nextLevel = await getNextLevel(req.currentLevel.id);
+        const greatestLevelId = await models.Level.findOne({
+          attributes: ["id"],
+          order: [["id", "DESC"]],
+        });
 
-        req.user.points += await points(req.currentLevel);
-        if (!nextLevel) {
+        // If we're at the last level
+        if (req.user.currentLevelId === greatestLevelId.dataValues.id) {
+          req.user.points += await points(req.currentLevel);
           req.user.finished = true;
           res.redirect("/play/fin");
+        } else {
+          const nextLevel = await getNextLevel(req.currentLevel.id);
+
+          req.user.points += await points(req.currentLevel);
+
+          if (nextLevel) {
+            req.session.currentLevel = nextLevel;
+            req.session.currentLevelNo += 1;
+            req.user.currentLevelId = nextLevel.id;
+          }
+
+          attempt.correct = true;
+          res.redirect("/play");
         }
-
-        if (nextLevel) {
-          req.session.currentLevel = nextLevel;
-          req.session.currentLevelNo += 1;
-          req.user.currentLevelId = nextLevel.id;
-        }
-
-        attempt.correct = true;
-
-        res.redirect("/play");
       } else {
         res.locals.error = "Incorrect answer";
 
@@ -171,19 +178,8 @@ router.post(
 router.get(
   "/fin",
   redirectIfNotRegistered,
-  fin(),
-  comingSoon(),
   asyncH(async function verifyFinished(req, res, next) {
     if (req.user.finished) {
-      const nlevel = await getNextLevel(req.user.currentLevelId);
-      console.log(nlevel);
-      if (nlevel) {
-        req.user.currentLevelId = nlevel.id;
-        req.user.finished = false;
-        await req.user.save();
-        return res.redirect("/play");
-      }
-
       return next();
     }
 
