@@ -67,10 +67,12 @@ router.get(
           })
         ).map((a) => {
           const time = new Date(a.createdAt);
+          const istTimestamp = time.getTime() + 11 * 60 * 60 * 1000;
+          const istTime = new Date(istTimestamp);
           return {
             ...a.dataValues,
-            date: time.toLocaleDateString("hi-IN"),
-            time: time.toLocaleTimeString("hi-IN"),
+            date: istTime.toLocaleDateString("hi-IN"),
+            time: istTime.toLocaleTimeString("hi-IN"),
             level: a.Level.question,
             correct: a.Level.answer,
           };
