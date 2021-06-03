@@ -120,9 +120,6 @@ router.post(
   },
   asyncH(async (req, res, next) => {
     try {
-      // Log user lastMoveTime
-      req.user.lastMoveTime = new Date();
-
       // Log attempt
       const attempt = {
         attempt: req.body.answer,
@@ -153,6 +150,9 @@ router.post(
             req.session.currentLevelNo += 1;
             req.user.currentLevelId = nextLevel.id;
           }
+
+          // Log user lastMoveTime
+          req.user.lastMoveTime = new Date();
 
           attempt.correct = true;
           res.redirect("/play");
