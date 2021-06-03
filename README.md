@@ -40,6 +40,7 @@ npm run serve:dev
 
 ## TODO
 
+- [ ] Unique Username (didn't work - 2021)
 - [ ] Dockerize
 - [ ] IP logging and banning
 - [ ] Make navbar responsive
