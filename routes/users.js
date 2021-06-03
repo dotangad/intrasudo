@@ -67,7 +67,7 @@ router.get(
           })
         ).map((a) => {
           const time = new Date(a.createdAt);
-          const istTimestamp = time.getTime() + 11 * 60 * 60 * 1000;
+          const istTimestamp = time.getTime() + 5.5 * 60 * 60 * 1000;
           const istTime = new Date(istTimestamp);
           return {
             ...a.dataValues,
