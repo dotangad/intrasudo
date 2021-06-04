@@ -44,7 +44,7 @@ npm run serve:dev
 - [ ] Disqualify in Bot `!dq`
   1. Allow in all servers
   2. Allow only by admins 
-- [ ] Change Finished page from `v1.0` to `v2.0`
+- [ ] Change Finished page from `v1.0` to `v3.0`
 - [ ] Dockerize
 - [ ] IP logging and banning
 - [ ] Make navbar responsive
