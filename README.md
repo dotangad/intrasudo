@@ -41,6 +41,10 @@ npm run serve:dev
 ## TODO
 
 - [ ] Unique Username (didn't work - 2021)
+- [ ] Disqualify in Bot `!dq`
+  1. Allow in all servers
+  2. Allow only by admins 
+- [ ] Change Finished page from `v1.0` to `v2.0`
 - [ ] Dockerize
 - [ ] IP logging and banning
 - [ ] Make navbar responsive
