@@ -104,7 +104,7 @@ const lookup = async (message) => {
 
 const dq = async (message) => {
   try {
-    if (!message.content.startsWith("!dq")) return;
+    if (!message.member.roles.cache.find((r) => r.name === "admin")) return;
     const [username, discriminator] = decodeUsername(message.content);
 
     const user = await models.User.findOne({
@@ -153,7 +153,8 @@ const botCommands = async (message) => {
 client.on("message", (message) => {
   if (message.channel.name === "verification") verification(message);
   if (message.channel.name === "discord-lookup") lookup(message);
-  if (message.channel.name === "dq") dq(message);
+  //if (message.channel.name === "dq") dq(message);
+  if (message.content.startsWith("!dq")) dq(message);
   if (message.channel.name === "bot-commands") botCommands(message);
 });
 
