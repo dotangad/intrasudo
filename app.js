@@ -13,7 +13,10 @@ const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
 const routes = require("./routes");
 
-const client = redis.createClient(process.env.REDIS_URL);
+const client = redis.createClient({
+  host: "redis-server",
+  port: 6379,
+});
 const app = express();
 
 // Views and static files
