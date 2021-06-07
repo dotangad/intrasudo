@@ -1,6 +1,6 @@
 # Intrasudo platform
 
-## Setup
+## Setup - Normal
 
 1. Install `node`, `npm`, `mysql`, `redis`.
 2. Start `mysql` and `redis`.
@@ -37,6 +37,37 @@ npm run db:seed
 ```
 npm run serve:dev
 ```
+
+## Setup - Docker
+1. Clone this repo
+
+```
+git clone https://github.com/dotangad/intrasudo
+```
+
+2. Go to the GCP console and get your OAuth Client ID and secret.
+3. Copy and fill out the config files.
+
+```
+cp .env.example .env
+cp config/config.example.json config/config.json
+```
+
+4. Start Docker Containers
+
+```
+docker-compose up
+```
+
+5. Run migrations and seeders
+
+```
+docker ps # will return list of containers
+docker-compose exec app_container_id node run db:migrate
+docker-compose exec app_container_id node run seed
+```
+> Run this only during the first time
+
 
 ## TODO
 
