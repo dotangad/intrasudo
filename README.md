@@ -50,7 +50,7 @@ git clone https://github.com/dotangad/intrasudo
 
 ```
 cp .env.example .env
-cp config/config.example.json config/config.json
+cp config/config.docker.example.json config/config.json
 ```
 
 4. Start Docker Containers
