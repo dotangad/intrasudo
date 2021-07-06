@@ -1,5 +1,7 @@
 # Intrasudo platform
 
+Moved to https://github.com/exunclan/intrasudo
+
 ## Setup - Normal
 
 1. Install `node`, `npm`, `mysql`, `redis`.
